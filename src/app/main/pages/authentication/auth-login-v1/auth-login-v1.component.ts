@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
-import { CoreConfigService } from '@core/services/config.service';
+import { CoreConfigService } from "@core/services/config.service";
+import { SupabaseService } from "@core/services/supabase.service";
+import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-auth-login-v1',
-  templateUrl: './auth-login-v1.component.html',
-  styleUrls: ['./auth-login-v1.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-auth-login-v1",
+  templateUrl: "./auth-login-v1.component.html",
+  styleUrls: ["./auth-login-v1.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthLoginV1Component implements OnInit {
   //  Public
@@ -28,24 +30,24 @@ export class AuthLoginV1Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder, private supabase: SupabaseService, private router: Router) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
   }
 
@@ -71,6 +73,21 @@ export class AuthLoginV1Component implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+
+    this.getToken();
+  }
+
+  async getToken() {
+    const { data, error } = await this.supabase.signIn(this.f.email.value, this.f.password.value);
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+    if (data) {
+      localStorage.setItem("userJWT", data.session.access_token);
+      this.router.navigate(["/dashboard"]);
+    }
   }
 
   // Lifecycle Hooks
@@ -81,12 +98,12 @@ export class AuthLoginV1Component implements OnInit {
    */
   ngOnInit(): void {
     this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe((config) => {
       this.coreConfig = config;
     });
   }

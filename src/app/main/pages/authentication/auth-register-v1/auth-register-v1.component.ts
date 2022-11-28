@@ -1,16 +1,17 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
 
-import { CoreConfigService } from '@core/services/config.service';
+import { CoreConfigService } from "@core/services/config.service";
+import { SupabaseService } from "@core/services/supabase.service";
 
 @Component({
-  selector: 'app-auth-register-v1',
-  templateUrl: './auth-register-v1.component.html',
-  styleUrls: ['./auth-register-v1.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  selector: "app-auth-register-v1",
+  templateUrl: "./auth-register-v1.component.html",
+  styleUrls: ["./auth-register-v1.component.scss"],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthRegisterV1Component implements OnInit {
   // Public
@@ -28,24 +29,24 @@ export class AuthRegisterV1Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder, private supabase: SupabaseService) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
     this._coreConfigService.config = {
       layout: {
         navbar: {
-          hidden: true
+          hidden: true,
         },
         menu: {
-          hidden: true
+          hidden: true,
         },
         footer: {
-          hidden: true
+          hidden: true,
         },
         customizer: false,
-        enableLocalStorage: false
-      }
+        enableLocalStorage: false,
+      },
     };
   }
 
@@ -71,6 +72,8 @@ export class AuthRegisterV1Component implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
+
+    this.supabase.signup(this.f.email.value, this.f.password.value);
   }
 
   // Lifecycle Hooks
@@ -81,13 +84,12 @@ export class AuthRegisterV1Component implements OnInit {
    */
   ngOnInit(): void {
     this.registerForm = this._formBuilder.group({
-      username: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", Validators.required],
     });
 
     // Subscribe to config changes
-    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe(config => {
+    this._coreConfigService.config.pipe(takeUntil(this._unsubscribeAll)).subscribe((config) => {
       this.coreConfig = config;
     });
   }

@@ -1,0 +1,47 @@
+<div class="todo-header row">
+  <div class="col-xl-8"></div>
+  <div class="col-xl-4 col-sm-12">
+    <div class="row">
+      <div class="col-4"><button type="button" class="btn btn-primary" rippleEffect (click)="modalOpenVC(modalVC)">Add New</button></div>
+      <div class="col-1"></div>
+      <div class="col-5"><button type="button" class="btn btn-danger" rippleEffect>Delete Completed</button></div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let item of todo" class="mt-2">
+  <app-card [todo]="item"></app-card>
+</div>
+
+<!-- Modal -->
+<ng-template #modalVC let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalCenterTitle">Create new task</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xl-6 col-md-6 col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Title</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Title" formControlName="title" />
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Details</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Details" formControlName="details" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click'); onSubmit()" rippleEffect>Accept</button>
+  </div>
+</ng-template>
+<!-- / Modal -->
