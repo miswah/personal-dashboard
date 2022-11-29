@@ -80,6 +80,10 @@ const appRoutes: Routes = [
     loadChildren: () => import("./main/view/todo/todo.module").then((m) => m.TodoModule),
   },
   {
+    path: "subject",
+    loadChildren: () => import("./main/view/subjects/subjects.module").then((m) => m.SubjectsModule),
+  },
+  {
     path: "",
     redirectTo: "/dashboard/ecommerce",
     pathMatch: "full",

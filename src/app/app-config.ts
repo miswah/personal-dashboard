@@ -1,4 +1,4 @@
-import { CoreConfig } from '@core/types';
+import { CoreConfig } from "@core/types";
 
 /**
  * Default App Config
@@ -47,6 +47,6 @@ export const coreConfig: CoreConfig = {
     enableLocalStorage: true,
     customizer  : true,                       // Boolean: true, false (Enable theme customizer)
     scrollTop   : true,                       // Boolean: true, false (Enable scroll to top button)
-    buyNow      : true                        // Boolean: true, false (Set false in real project, For demo purpose only)
+    buyNow      : false                        // Boolean: true, false (Set false in real project, For demo purpose only)
   }
 }

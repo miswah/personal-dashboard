@@ -5,6 +5,7 @@ import { ListComponent } from "./list/list.component";
 import { ViewComponent } from "./view/view.component";
 import { RouterModule, Routes } from "@angular/router";
 import { environment } from "environments/environment";
+import { CardComponent } from './card/card.component';
 
 //Routing
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SubjectsComponent, ListComponent, ViewComponent],
+  declarations: [SubjectsComponent, ListComponent, ViewComponent, CardComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
 })
 export class SubjectsModule {}

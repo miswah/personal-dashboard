@@ -53,6 +53,13 @@ export const menu: CoreMenu[] = [
         url: "/todo",
       },
       {
+        id: "Subject",
+        title: "Subject",
+        type: "item",
+        icon: "book-open",
+        url: "/subject",
+      },
+      {
         id: "email",
         title: "Email",
         translate: "MENU.APPS.EMAIL",
