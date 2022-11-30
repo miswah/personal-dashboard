@@ -60,6 +60,20 @@ export const menu: CoreMenu[] = [
         url: "/subject",
       },
       {
+        id: "Project",
+        title: "Project",
+        type: "item",
+        icon: "codesandbox",
+        url: "/project",
+      },
+      {
+        id: "Expense",
+        title: "Expense",
+        type: "item",
+        icon: "dollar-sign",
+        url: "/expense",
+      },
+      {
         id: "email",
         title: "Email",
         translate: "MENU.APPS.EMAIL",

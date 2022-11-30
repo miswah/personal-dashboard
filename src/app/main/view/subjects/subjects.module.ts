@@ -5,7 +5,7 @@ import { ListComponent } from "./list/list.component";
 import { ViewComponent } from "./view/view.component";
 import { RouterModule, Routes } from "@angular/router";
 import { environment } from "environments/environment";
-import { CardComponent } from './card/card.component';
+import { CardComponent } from "./card/card.component";
 
 //Routing
 const routes: Routes = [

@@ -84,6 +84,14 @@ const appRoutes: Routes = [
     loadChildren: () => import("./main/view/subjects/subjects.module").then((m) => m.SubjectsModule),
   },
   {
+    path: "project",
+    loadChildren: () => import("./main/view/project/project.module").then((m) => m.ProjectModule),
+  },
+  {
+    path: "expense",
+    loadChildren: () => import("./main/view/expenses/expenses.module").then((m) => m.ExpensesModule),
+  },
+  {
     path: "",
     redirectTo: "/dashboard/ecommerce",
     pathMatch: "full",
