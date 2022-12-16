@@ -76,10 +76,6 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: "todo",
-    loadChildren: () => import("./main/view/todo/todo.module").then((m) => m.TodoModule),
-  },
-  {
     path: "subject",
     loadChildren: () => import("./main/view/subjects/subjects.module").then((m) => m.SubjectsModule),
   },
