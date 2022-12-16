@@ -92,6 +92,11 @@ const appRoutes: Routes = [
     loadChildren: () => import("./main/view/expenses/expenses.module").then((m) => m.ExpensesModule),
   },
   {
+    path: "course",
+    loadChildren: () => import("./main/view/course/course.module").then((m) => m.CourseModule),
+  },
+  { path: "board", loadChildren: () => import("./main/view/dashboard/dashboard.module").then((m) => m.DashboardModule) },
+  {
     path: "",
     redirectTo: "/dashboard/ecommerce",
     pathMatch: "full",

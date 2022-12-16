@@ -9,7 +9,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ReactiveFormsModule } from "@angular/forms";
 
 // rputing
-const routes: Routes = [{ path: "", component: TodoComponent, title: "Todo - " + environment.title, data: { animation: "todo" } }];
+const routes: Routes = [{ path: "list", component: TodoComponent, title: "Todo - " + environment.title, data: { animation: "todo" } }];
 
 @NgModule({
   declarations: [TodoComponent, CardComponent, CreateComponent],

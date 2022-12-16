@@ -1,0 +1,30 @@
+<div>
+  <div class="row">
+    <div class="col-md-12 col-xl-6">
+      <div class="card">
+        <!-- Search box -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="basicInput">Search Projects</label>
+                <input type="text" class="form-control" id="basicInput" placeholder="Enter Project name " />
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- Project List -->
+          <div *ngFor="let project of projects">
+            <app-card [project]="project" (click)="redirectToView(project.id)"></app-card>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-xl-6">
+      <div class="card">
+        <div class="card-body">todo</div>
+      </div>
+    </div>
+  </div>
+</div>

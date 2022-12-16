@@ -7,16 +7,17 @@ import { CardComponent } from "./card/card.component";
 import { ViewComponent } from "./view/view.component";
 import { environment } from "environments/environment";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { TimelineComponent } from './timeline/timeline.component';
+import { TimelineComponent } from "./timeline/timeline.component";
 
 // Routes
 const routes: Routes = [
-  { path: "", component: ListComponent, title: "Project - " + environment.title, data: { animation: "project" } },
+  { path: "list", component: ListComponent, title: "Project - " + environment.title, data: { animation: "project" } },
   { path: "view/:id", component: ViewComponent, data: { animation: "project" } },
 ];
 
 @NgModule({
   declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent],
   imports: [CommonModule, RouterModule.forChild(routes), NgbModule],
+  exports: [CardComponent],
 })
 export class ProjectModule {}

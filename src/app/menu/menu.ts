@@ -35,6 +35,14 @@ export const menu: CoreMenu[] = [
         icon: "circle",
         url: "dashboard/ecommerce",
       },
+      {
+        id: "personalDashboard",
+        title: "Management",
+        type: "item",
+        role: ["Admin"], //? To set multiple role: ['Admin', 'Client']
+        icon: "circle",
+        url: "board",
+      },
     ],
   },
   // Apps & Pages
@@ -50,7 +58,14 @@ export const menu: CoreMenu[] = [
         title: "Tasks",
         type: "item",
         icon: "target",
-        url: "/todo",
+        url: "/todo/list",
+      },
+      {
+        id: "course",
+        title: "Courses",
+        type: "item",
+        icon: "code",
+        url: "/course",
       },
       {
         id: "Subject",
@@ -64,7 +79,7 @@ export const menu: CoreMenu[] = [
         title: "Project",
         type: "item",
         icon: "codesandbox",
-        url: "/project",
+        url: "/project/list",
       },
       {
         id: "Expense",

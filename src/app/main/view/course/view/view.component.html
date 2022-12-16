@@ -1,0 +1,60 @@
+<div class="card">
+  <div class="card-body">
+    <p class="card-title text-center">
+      {{ course.title }} <span class="pull-right complete">{{ course.status }}</span>
+    </p>
+
+    <div class="row mt-2 text-center">
+      <div class="col-3">
+        <p>{{ course.completed }}</p>
+        <p class="course-title">Completed</p>
+      </div>
+
+      <div class="col-3">
+        <p>{{ course.total_task }}</p>
+        <p class="course-title">Total Task</p>
+      </div>
+
+      <div class="col-3">
+        <p>{{ course.due_date | date : "mediumDate" }}</p>
+        <p class="course-title">Due Date</p>
+      </div>
+
+      <div class="col-3">
+        <p>{{ course.last_visited | date : "short" }}</p>
+        <p class="course-title lead">Last Visited Date and Time</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-6">
+    <div *ngFor="let todo of todos">
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="custom-control custom-control-success custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="{{ todo.id }}" />
+            <label class="custom-control-label" for="{{ todo.id }}">{{ todo.title }}</label>
+          </div>
+          <div class="card-text todo-body">
+            <p class="ml-3 mb-0">{{ todo.details }}</p>
+            <div class="row text-center">
+              <div class="col-6">{{ todo.created_at | date }}</div>
+              <div class="col-6" *ngIf="todo.completed_at">{{ todo.completed_at | date }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <div class="card">
+      <div class="card-body">
+        <p class="card-title text-center lead">Timeline</p>
+        <app-timeline></app-timeline>
+      </div>
+    </div>
+  </div>
+</div>
