@@ -54,13 +54,6 @@ export const menu: CoreMenu[] = [
     icon: "package",
     children: [
       {
-        id: "todo",
-        title: "Tasks",
-        type: "item",
-        icon: "target",
-        url: "/todo/list",
-      },
-      {
         id: "course",
         title: "Courses",
         type: "item",
