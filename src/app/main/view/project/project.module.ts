@@ -8,6 +8,7 @@ import { ViewComponent } from "./view/view.component";
 import { environment } from "environments/environment";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TimelineComponent } from "./timeline/timeline.component";
+import { HighchartsChartModule } from "highcharts-angular";
 
 // Routes
 const routes: Routes = [
@@ -17,7 +18,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, HighchartsChartModule],
   exports: [CardComponent],
 })
 export class ProjectModule {}

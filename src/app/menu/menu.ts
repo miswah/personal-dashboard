@@ -54,6 +54,22 @@ export const menu: CoreMenu[] = [
     icon: "package",
     children: [
       {
+        id: "todo",
+        title: "Todo",
+        translate: "MENU.APPS.TODO",
+        type: "item",
+        icon: "check-square",
+        url: "apps/todo",
+      },
+      {
+        id: "calendar",
+        title: "Calendar",
+        translate: "MENU.APPS.CALENDAR",
+        type: "item",
+        icon: "calendar",
+        url: "apps/calendar",
+      },
+      {
         id: "course",
         title: "Courses",
         type: "item",
@@ -96,22 +112,6 @@ export const menu: CoreMenu[] = [
         type: "item",
         icon: "message-square",
         url: "apps/chat",
-      },
-      {
-        id: "todo",
-        title: "Todo",
-        translate: "MENU.APPS.TODO",
-        type: "item",
-        icon: "check-square",
-        url: "apps/todo",
-      },
-      {
-        id: "calendar",
-        title: "Calendar",
-        translate: "MENU.APPS.CALENDAR",
-        type: "item",
-        icon: "calendar",
-        url: "apps/calendar",
       },
       {
         id: "pages",
