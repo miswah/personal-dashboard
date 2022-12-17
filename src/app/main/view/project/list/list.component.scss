@@ -1,9 +1,13 @@
 @import "https://code.highcharts.com/css/highcharts.css";
 
-// #container {
-//   max-width: 800px;
-//   margin: 1em auto;
-// }
+#container {
+  min-width: 100%;
+  margin: 1em auto;
+}
+
+#kaban-card {
+  min-width: 100%;
+}
 
 .highcharts-treegrid-node-level-1 {
   font-size: 13px;
