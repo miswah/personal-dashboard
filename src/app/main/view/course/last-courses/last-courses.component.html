@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+    <div class="card-title mt-1">Last Visited Courses</div>
+
+    <div *ngFor="let course of courses">
+      <div class="course__card">
+        <p class="ml-2 course__card-title">{{ course.title }}</p>
+
+        <div class="row text-center">
+          <div class="col-4">
+            {{ course.module }}
+            <p>Total Modules</p>
+          </div>
+          <div class="col-4">
+            {{ course.last_visited_module }}
+            <p>Last Visited Module</p>
+          </div>
+          <div class="col-4">
+            {{ course.last_visited | date : "short" }}
+            <p>Last Visited</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
