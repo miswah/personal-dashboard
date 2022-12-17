@@ -8,14 +8,19 @@ import { ViewComponent } from "./view/view.component";
 import { RouterModule, Routes } from "@angular/router";
 import { environment } from "environments/environment";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { CourseCardComponent } from "./course-card/course-card.component";
+import { SwiperModule } from "ngx-swiper-wrapper";
+import { LastCoursesComponent } from "./last-courses/last-courses.component";
+import { CourseActivityComponent } from "./course-activity/course-activity.component";
+import { CourseDashboardComponent } from "./course-dashboard/course-dashboard.component";
 
 // Routes
 const routes: Routes = [
-  { path: "", component: ListComponent, title: "Course - " + environment.title, data: { animation: "course" } },
+  { path: "", component: CourseDashboardComponent, title: "Course - " + environment.title, data: { animation: "course" } },
   { path: "view/:id", component: ViewComponent, data: { animation: "course" } },
 ];
 @NgModule({
-  declarations: [CourseComponent, CardComponent, ListComponent, TimelineComponent, ViewComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule],
+  declarations: [CourseComponent, CardComponent, ListComponent, TimelineComponent, ViewComponent, CourseCardComponent, LastCoursesComponent, CourseActivityComponent, CourseDashboardComponent],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, SwiperModule],
 })
 export class CourseModule {}
