@@ -17,46 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "hammerjs",
-              "node-waves",
-              "app/main/ui/icons/feather/feather.component",
-              "@angularclass/hmr",
-              "quill",
-              "lodash",
-              "uuid",
-              "nouislider",
-              "dragula",
-              "apexcharts",
-              "chart.js",
-              "contra/emitter",
-              "crossvent",
-              "highlight.js",
-              "ng2-flatpickr",
-              "mobx",
-              "fast-deep-equal",
-              "plyr",
-              "sweetalert2",
-              "bs-stepper",
-              "feather-icons"
-            ],
+            "allowedCommonJsDependencies": ["hammerjs", "node-waves", "app/main/ui/icons/feather/feather.component", "@angularclass/hmr", "quill", "lodash", "uuid", "nouislider", "dragula", "apexcharts", "chart.js", "contra/emitter", "crossvent", "highlight.js", "ng2-flatpickr", "mobx", "fast-deep-equal", "plyr", "sweetalert2", "bs-stepper", "feather-icons"],
             "outputPath": "dist/vuexy",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": [
-              "src/styles.scss",
-              "node_modules/highlight.js/scss/atom-one-dark.scss",
-              "src/assets/fonts/feather/iconfont.css",
-              "src/assets/fonts/font-awesome/css/font-awesome.min.css",
-              "src/assets/fonts/flag-icon-css/css/flag-icon.min.css",
-              "./node_modules/@fullcalendar/common/main.css",
-              "./node_modules/@fullcalendar/daygrid/main.css",
-              "./node_modules/@fullcalendar/timegrid/main.css",
-              "./node_modules/@fullcalendar/list/main.css"
-            ],
+            "styles": ["src/styles.scss", "node_modules/highlight.js/scss/atom-one-dark.scss", "src/assets/fonts/feather/iconfont.css", "src/assets/fonts/font-awesome/css/font-awesome.min.css", "src/assets/fonts/flag-icon-css/css/flag-icon.min.css", "./node_modules/@fullcalendar/common/main.css", "./node_modules/@fullcalendar/daygrid/main.css", "./node_modules/@fullcalendar/timegrid/main.css", "./node_modules/@fullcalendar/list/main.css", "node_modules/jqwidgets-scripts/jqwidgets/styles/jqx.base.css"],
             "stylePreprocessorOptions": {
               "includePaths": ["node_modules", "src/assets/"]
             },
