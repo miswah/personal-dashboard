@@ -13,6 +13,7 @@ import { SwiperModule } from "ngx-swiper-wrapper";
 import { LastCoursesComponent } from "./last-courses/last-courses.component";
 import { CourseActivityComponent } from "./course-activity/course-activity.component";
 import { CourseDashboardComponent } from "./course-dashboard/course-dashboard.component";
+import { NgApexchartsModule } from "ng-apexcharts";
 
 // Routes
 const routes: Routes = [
@@ -21,6 +22,6 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [CourseComponent, CardComponent, ListComponent, TimelineComponent, ViewComponent, CourseCardComponent, LastCoursesComponent, CourseActivityComponent, CourseDashboardComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, SwiperModule],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, SwiperModule, NgApexchartsModule],
 })
 export class CourseModule {}
