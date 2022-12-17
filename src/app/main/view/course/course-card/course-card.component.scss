@@ -1,0 +1,17 @@
+@import "@core/scss/angular/libs/swiper.component.scss";
+
+.swiper-slide {
+  border-radius: 15px !important;
+}
+
+.status__p {
+  padding: 6px;
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: black;
+
+  position: absolute;
+  top: 1px;
+  right: 2px;
+}
