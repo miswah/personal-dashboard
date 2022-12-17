@@ -6,6 +6,15 @@
   </div>
 </div> -->
 
-<div id="container" #divRef></div>
+<div class="row">
+  <div id="container" #divRef></div>
+</div>
 
-<jqxKanban #myKanban (onItemAttrClicked)="myKanbanOnItemAttrClicked($event)" (onColumnAttrClicked)="myKanbanonColumnAttrClicked($event)" [height]="600" [template]="template" [source]="dataAdapter" [columns]="columns" [width]="getWidth()" [resources]="resourcesAdapterFunc()" [itemRenderer]="itemRenderer"> </jqxKanban>
+<div class="row mt-3">
+  <div class="card" id="kaban-card">
+    <div class="card-body">
+      <div class="card-title">Tasks Log</div>
+      <jqxKanban #myKanban (onItemAttrClicked)="myKanbanOnItemAttrClicked($event)" (onColumnAttrClicked)="myKanbanonColumnAttrClicked($event)" [height]="600" [template]="template" [source]="dataAdapter" [columns]="columns" [width]="getWidth()" [resources]="resourcesAdapterFunc()" [itemRenderer]="itemRenderer"> </jqxKanban>
+    </div>
+  </div>
+</div>
