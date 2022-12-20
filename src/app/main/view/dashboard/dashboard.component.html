@@ -15,7 +15,7 @@
           <hr />
           <!-- Project List -->
           <div *ngFor="let project of projects">
-            <app-project-card [project]="project" (click)="redirectToView(project.id)"></app-project-card>
+            <app-card-full [project]="project" (click)="redirectToView(project.id)"></app-card-full>
             <hr />
           </div>
         </div>
@@ -59,9 +59,14 @@
           <div *ngFor="let course of courses">
             <div class="course__card">
               <div class="row">
-                <p class="course__card-title">{{ course.title }}</p>
-                <div class="progress-wrapper">
-                  <ngb-progressbar type="primary" showValue="true" [height]="progressbarHeight" [value]="25"></ngb-progressbar>
+                <div class="col-5">
+                  <p class="course__card-title">{{ course.title }}</p>
+                </div>
+
+                <div class="col-7">
+                  <div class="progress-wrapper">
+                    <ngb-progressbar type="primary" showValue="true" [height]="progressbarHeight" [value]="25"></ngb-progressbar>
+                  </div>
                 </div>
               </div>
 
