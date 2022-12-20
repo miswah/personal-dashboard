@@ -9,6 +9,8 @@ import { environment } from "environments/environment";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TimelineComponent } from "./timeline/timeline.component";
 import { jqxKanbanModule } from "jqwidgets-ng/jqxkanban";
+import { ProjectCardComponent } from "./project-card/project-card.component";
+import { SwiperModule } from "ngx-swiper-wrapper";
 
 // Routes
 const routes: Routes = [
@@ -17,8 +19,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, jqxKanbanModule],
+  declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent, ProjectCardComponent],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, jqxKanbanModule, SwiperModule],
   exports: [CardComponent],
 })
 export class ProjectModule {}

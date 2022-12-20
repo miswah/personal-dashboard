@@ -2,6 +2,8 @@ import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from "@an
 import { Router } from "@angular/router";
 import * as Highcharts from "highcharts/highcharts-gantt";
 import { jqxKanbanComponent } from "jqwidgets-ng/jqxkanban";
+import { SwiperConfigInterface } from "ngx-swiper-wrapper";
+import { ProjectManagementService } from "../project-management.service";
 
 @Component({
   selector: "app-list",
@@ -21,6 +23,23 @@ export class ListComponent implements OnInit {
     { name: "color", map: "hex", type: "string" },
     { name: "resourceId", type: "number" },
   ];
+
+  public swiperswiperCenteredSlides: SwiperConfigInterface = {
+    slidesPerView: 5,
+    centeredSlides: true,
+    spaceBetween: 30,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+  };
+
+  public centeredSlideIndex = 1;
+
   getWidth(): any {
     if (document.body.offsetWidth < 850) {
       return "90%";
@@ -139,9 +158,11 @@ export class ListComponent implements OnInit {
     { id: 2, title: "Web Development", total_task: 15, completed: 20, due_date: "2022-10-31T09:00:00Z", status: "Completed", last_visited: "2022-10-31T09:00:00Z" },
   ];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private projectService: ProjectManagementService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getProjects();
+  }
 
   ngAfterViewInit() {
     this.highchartclick();
@@ -149,6 +170,22 @@ export class ListComponent implements OnInit {
 
   redirectToView(id: number) {
     this.router.navigate(["../project/view", id]);
+  }
+
+  async getProjects(): Promise<void> {
+    //To avoid multiple api calls for same data check if data exists
+    if (this.projectService.listOfProjects) {
+      this.projects = this.projectService.listOfProjects;
+      return;
+    }
+
+    let { data: projects, error } = await this.projectService.getProjects();
+    if (error) {
+      console.error("error", error.message);
+    } else {
+      this.projectService.listOfProjects = projects;
+      this.projects = projects;
+    }
   }
 
   highchartclick() {
