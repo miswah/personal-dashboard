@@ -4,7 +4,7 @@ export const environment = {
   apiUrl: "http://localhost:4000",
   title: "test",
   supabase: {
-    url: "https://kpwubhupojzdwzfhjfel.supabase.co",
-    key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtwd3ViaHVwb2p6ZHd6ZmhqZmVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjkyODY0NTgsImV4cCI6MTk4NDg2MjQ1OH0.Jgw1B8BFYfvWzTHzNuecOqEAJeWkXDORbYnEMvWIjFA",
+    url: "https://ardhiqsatdehmnjgheqi.supabase.co",
+    key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyZGhpcXNhdGRlaG1uamdoZXFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzE2Mjc3NjgsImV4cCI6MTk4NzIwMzc2OH0.NfHC-ysu2zNuszYPDfNMtCP4J7sYG9v41ymD6Xq0zOk",
   },
 };
