@@ -32,6 +32,10 @@ export class ListComponent implements OnInit {
   }
 
   redirectToView(id: number) {
+    let index = this.subjects.findIndex((x) => x.id == id);
+
+    this.subjectService.subjectData = this.subjects[index];
+
     this.router.navigate(["../subject/view", id]);
   }
 }

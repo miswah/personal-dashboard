@@ -24,13 +24,14 @@ export class ViewComponent implements OnInit {
       this.subjectId = +prams.get("id");
     });
     this.getSubject(this.subjectId);
-    // this.getChapters(this.subjectId);
-    // this.getTopics(this.subjectId);
+    this.getChapters(this.subjectId);
+    this.getTopics(this.subjectId);
   }
 
   async getSubject(subjectId: number): Promise<void> {
     if (this.subjectService.subjectData && this.subjectService.subjectData.id == subjectId) {
       this.subject = this.subjectService.subjectData;
+      return;
     }
 
     let { data: subject, error } = await this.subjectService.getSubjectViaId(subjectId);
