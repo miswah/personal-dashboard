@@ -1,9 +1,9 @@
-<div class="card">
+<div class="card" *ngIf="subject">
   <div class="card-body">
-    <p class="card-title text-center">{{ subject.code }} - {{ subject.title }}</p>
+    <p class="card-title text-center">{{ subject.subject_code }} - {{ subject.title }}</p>
     <div class="row text-center">
       <div class="col-2">
-        <p>{{ subject.block }}</p>
+        <p>{{ subject.blocks }}</p>
         <p>Block</p>
       </div>
 
@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-2">
-        <p>{{ subject.completed_chapter }}</p>
+        <p>{{ subject.completed_chapters }}</p>
         <p>Completed Chapters</p>
       </div>
 
@@ -40,7 +40,7 @@
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let chapter of chapters">
               <span>{{ chapter.title }}</span>
               <button type="button" class="btn btn-flat-success" rippleEffect *ngIf="chapter.is_completed"><span [data-feather]="'check'" [class]="'mr-25'"></span>Completed</button>
-              <button type="button" class="btn btn-outline-primary" rippleEffect *ngIf="!chapter.is_completed"><span [data-feather]="'check'" [class]="'mr-25'"></span>Done</button>
+              <button type="button" class="btn btn-outline-primary" rippleEffect *ngIf="!chapter.is_completed" (click)="updateChapterStatus(chapter.id)"><span [data-feather]="'check'" [class]="'mr-25'"></span>Done</button>
             </li>
           </ul>
         </div>

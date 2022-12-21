@@ -1,4 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
+import { SubjectsManagementService } from "../subjects-management.service";
+import { id } from "@swimlane/ngx-datatable";
 
 @Component({
   selector: "app-view",
@@ -7,15 +10,83 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
   encapsulation: ViewEncapsulation.None,
 })
 export class ViewComponent implements OnInit {
-  public subject = { id: 1, code: "MCS01", title: "Software Dev", block: 4, total_chapters: 16, completed_chapter: 5, next_chapter: "SDR for center", next_important_date: "2022-10-31T09:00:00Z" };
+  public subject;
+  public chapters = [];
 
-  public chapters = [
-    { title: "Software Development Cycle", is_completed: true, block: 1 },
-    { title: "Waterfall cycle", is_completed: false, block: 1 },
-  ];
+  public topics;
 
-  public topics = [{ title: "SRD", chapter: "Waterfall cycle", is_completed: true }];
-  constructor() {}
+  private subjectId: number = 0;
 
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute, private subjectService: SubjectsManagementService) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((prams) => {
+      this.subjectId = +prams.get("id");
+    });
+    this.getSubject(this.subjectId);
+    // this.getChapters(this.subjectId);
+    // this.getTopics(this.subjectId);
+  }
+
+  async getSubject(subjectId: number): Promise<void> {
+    if (this.subjectService.subjectData && this.subjectService.subjectData.id == subjectId) {
+      this.subject = this.subjectService.subjectData;
+    }
+
+    let { data: subject, error } = await this.subjectService.getSubjectViaId(subjectId);
+
+    if (error) {
+      console.error("subject error", error.message);
+    } else {
+      this.subjectService.subjectData = subject[0];
+      this.subject = subject[0];
+    }
+  }
+
+  async getChapters(subjectId: number): Promise<void> {
+    if (this.subjectService.listOfChapters) {
+      this.chapters = this.subjectService.listOfChapters;
+      return;
+    }
+
+    let { data: chapters, error } = await this.subjectService.getChapters(subjectId);
+
+    if (error) {
+      console.error("error", error.message);
+    } else {
+      this.subjectService.listOfChapters = chapters;
+      this.chapters = chapters;
+    }
+
+    this.subjectService.getChapters(subjectId);
+  }
+
+  async getTopics(subjectId: number): Promise<void> {
+    if (this.subjectService.listOfTopics && this.subjectService.listOfTopics[0].subject_id == subjectId) {
+      this.topics = this.subjectService.listOfTopics;
+      return;
+    }
+
+    let { data: topics, error } = await this.subjectService.getTopics(subjectId);
+
+    if (error) {
+      console.error("error", error.message);
+    } else {
+      this.subjectService.listOfTopics = topics;
+      this.topics = topics;
+    }
+  }
+
+  async updateChapterStatus(chapterId: number): Promise<void> {
+    let { data: topics, error } = await this.subjectService.updateChapterStatus(chapterId, true);
+
+    if (error) {
+      console.error("update Error", error.message);
+    } else {
+      console.log("success", topics);
+      let index = this.topics.findIndex((x) => x.id === chapterId);
+      this.subjectService.listOfChapters[index].is_completed = true;
+      this.topics[index].is_completed = true;
+    }
+  }
 }

@@ -8,10 +8,7 @@ import { SubjectsManagementService } from "../subjects-management.service";
   styleUrls: ["./list.component.scss"],
 })
 export class ListComponent implements OnInit {
-  public subjects = [
-    { id: 1, code: "MCS01", title: "Software Dev", block: 4, total_chapters: 16, completed_chapter: 5, next_chapter: "SDR for center", next_important_date: "2022-10-31T09:00:00Z" },
-    { id: 2, code: "MCS01", title: "Software Dev", block: 4, total_chapters: 16, completed_chapter: 5, next_chapter: "SDR for center", next_important_date: "2022-10-31T09:00:00Z" },
-  ];
+  public subjects = [];
   constructor(private router: Router, private subjectService: SubjectsManagementService) {}
 
   ngOnInit(): void {
