@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { DragulaService } from 'ng2-dragula';
+import { Component, OnInit } from "@angular/core";
+import { DragulaService } from "ng2-dragula";
 
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
-import { Todo } from 'app/main/apps/todo/todo.model';
-import { TodoService } from 'app/main/apps/todo/todo.service';
+import { Todo } from "app/main/apps/todo/todo.model";
+import { TodoService } from "app/main/apps/todo/todo.service";
+import { TodoManagementService } from "../todo-management.service";
 
 @Component({
-  selector: 'app-todo-list',
-  templateUrl: './todo-list.component.html'
+  selector: "app-todo-list",
+  templateUrl: "./todo-list.component.html",
 })
 export class TodoListComponent implements OnInit {
   // Public
@@ -20,17 +21,13 @@ export class TodoListComponent implements OnInit {
    * @param {TodoService} _todoService
    * @param {CoreSidebarService} _coreSidebarService
    */
-  constructor(
-    private _dragulaService: DragulaService,
-    private _todoService: TodoService,
-    private _coreSidebarService: CoreSidebarService
-  ) {
+  constructor(private _dragulaService: DragulaService, private _todoService: TodoService, private _coreSidebarService: CoreSidebarService, private todoService: TodoManagementService) {
     // Drag And Drop With Handle
-    _dragulaService.destroy('todo-tasks-drag-area');
-    _dragulaService.createGroup('todo-tasks-drag-area', {
+    _dragulaService.destroy("todo-tasks-drag-area");
+    _dragulaService.createGroup("todo-tasks-drag-area", {
       moves: function (el, container, handle) {
-        return handle.classList.contains('drag-icon');
-      }
+        return handle.classList.contains("drag-icon");
+      },
     });
   }
 
@@ -71,7 +68,7 @@ export class TodoListComponent implements OnInit {
    */
   openTodo(idRef) {
     this._todoService.setCurrentTodo(idRef);
-    this._coreSidebarService.getSidebarRegistry('todo-sidebar-right').toggleOpen();
+    this._coreSidebarService.getSidebarRegistry("todo-sidebar-right").toggleOpen();
   }
 
   // Lifecycle Hooks
@@ -81,6 +78,17 @@ export class TodoListComponent implements OnInit {
    */
   ngOnInit(): void {
     // Subscribe Todos change
-    this._todoService.onTodoDataChange.subscribe(response => (this.todos = response));
+    this._todoService.onTodoDataChange.subscribe((response) => (this.todos = response));
+    // this.getTodo();
   }
+
+  // async getTodo(): Promise<void> {
+  //   let { data: todo, error } = await this.todoService.getTodo();
+
+  //   if (error) {
+  //     console.error(error);
+  //   } else {
+  //     this.todos = todo;
+  //   }
+  // }
 }

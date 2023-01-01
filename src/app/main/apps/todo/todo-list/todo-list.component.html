@@ -13,27 +13,11 @@
         <div class="input-group-prepend">
           <span class="input-group-text"><i data-feather="search" class="text-muted"></i></span>
         </div>
-        <input
-          type="text"
-          class="form-control"
-          id="todo-search"
-          placeholder="Search todo"
-          aria-label="Search..."
-          aria-describedby="todo-search"
-          (keyup)="updateQuery($event)"
-        />
+        <input type="text" class="form-control" id="todo-search" placeholder="Search todo" aria-label="Search..." aria-describedby="todo-search" (keyup)="updateQuery($event)" />
       </div>
     </div>
     <div ngbDropdown>
-      <a
-        ngbDropdownToggle
-        href="javascript:void(0);"
-        class="hide-arrow mr-1"
-        id="todoActions"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
+      <a ngbDropdownToggle href="javascript:void(0);" class="hide-arrow mr-1" id="todoActions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i data-feather="more-vertical" [size]="18" class="text-body"></i>
       </a>
       <div ngbDropdownMenu class="dropdown-menu-right" aria-labelledby="todoActions">
@@ -50,12 +34,8 @@
   <!-- Todo List -->
   <div class="todo-task-list-wrapper list-group" [perfectScrollbar]>
     <ul class="todo-task-list media-list" id="todo-task-list" dragula="todo-tasks-drag-area">
-      <app-todo-list-item
-        [todo]="todo"
-        *ngFor="let todo of todos; let i = index"
-        (click)="openTodo(todo.id); $event.stopPropagation()"
-      ></app-todo-list-item>
-      <ng-container *ngIf="todos.length; else noResults"></ng-container>
+      <app-todo-list-item [todo]="todo" *ngFor="let todo of todos; let i = index" (click)="openTodo(todo.id); $event.stopPropagation()"></app-todo-list-item>
+      <!-- <ng-container *ngIf="todos.length; else noResults"></ng-container> -->
     </ul>
 
     <ng-template #noResults>
