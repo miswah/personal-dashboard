@@ -45,7 +45,7 @@ export class ViewComponent implements OnInit {
   }
 
   async getChapters(subjectId: number): Promise<void> {
-    if (this.subjectService.listOfChapters) {
+    if (this.subjectService.listOfChapters && this.subjectService.listOfChapters[0].subject_id == subjectId) {
       this.chapters = this.subjectService.listOfChapters;
       return;
     }
@@ -63,7 +63,7 @@ export class ViewComponent implements OnInit {
   }
 
   async getTopics(subjectId: number): Promise<void> {
-    if (this.subjectService.listOfTopics && this.subjectService.listOfTopics[0].subject_id == subjectId) {
+    if (this.subjectService.listOfTopics && this.subjectService.listOfTopics[0]?.subject_id == subjectId) {
       this.topics = this.subjectService.listOfTopics;
       return;
     }
