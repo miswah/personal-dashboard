@@ -5,7 +5,7 @@
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th>Title</th>
               <th>Total Tasks</th>
               <th>Completed Tasks</th>
@@ -19,17 +19,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let course of courses">
+            <tr *ngFor="let course of courses" class="text-center">
               <td>{{ course.title }}</td>
-              <td>{{ course.total_task }}</td>
-              <td>{{ course.completed }}</td>
+              <td>{{ course.total_tasks }}</td>
+              <td>{{ course.completed_tasks }}</td>
               <td>{{ course.project }}</td>
               <td>{{ course.last_visited | date : "shortDate" }}</td>
               <td>{{ course.due_date | date : "shortDate" }}</td>
-              <td>{{ course.modules }}</td>
+              <td>{{ course.total_modules }}</td>
               <td>{{ course.completed_modules }}</td>
               <td>{{ course.last_visited_module }}</td>
-              <td><button class="btn">Open</button></td>
+              <td><a href="{{ course.link }}">Open</a></td>
             </tr>
           </tbody>
         </table>
