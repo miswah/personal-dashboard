@@ -1,14 +1,11 @@
 export class Todo {
   id? = undefined;
-  title = '';
-  dueDate = '';
-  description = '';
-  assignee = {
-    fullName: '',
-    avatar: ''
-  };
-  tags = [];
+  title = "";
+  due_date = "";
+  description = "";
+  tag = undefined;
   completed = false;
   deleted = false;
   important = false;
+  priority = "";
 }

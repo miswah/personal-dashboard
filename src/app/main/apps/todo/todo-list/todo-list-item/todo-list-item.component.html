@@ -5,16 +5,7 @@
       <i data-feather="more-vertical" class="drag-icon"></i>
       <div class="title-wrapper">
         <div class="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            class="custom-control-input todo-checkbox"
-            id="customCheck{{ todo.id }}"
-            name="customCheck{{ todo.id }}"
-            [(ngModel)]="todo.completed"
-            [checked]="todo.completed"
-            (click)="$event.stopPropagation()"
-            (ngModelChange)="checkboxStateChange($event)"
-          />
+          <input type="checkbox" class="custom-control-input todo-checkbox" id="customCheck{{ todo.id }}" name="customCheck{{ todo.id }}" [(ngModel)]="todo.completed" [checked]="todo.completed" (click)="$event.stopPropagation()" (ngModelChange)="checkboxStateChange($event)" />
           <label class="custom-control-label" for="customCheck{{ todo.id }}"></label>
         </div>
         <span class="todo-title">{{ todo.title }}</span>
@@ -24,22 +15,18 @@
       <div class="badge-wrapper mr-1">
         <div
           class="badge badge-pill badge-light-primary text-capitalize"
-          *ngFor="let tag of todo.tags; let i = index"
           [ngClass]="{
-            'badge-light-primary': tag == 'team',
-            'badge-light-success': tag == 'low',
-            'badge-light-danger': tag == 'high',
-            'badge-light-warning': tag == 'medium',
-            'badge-light-info': tag == 'update'
+            'badge-light-primary': todo.priority == 'team',
+            'badge-light-success': todo.priority == 'low',
+            'badge-light-danger': todo.priority == 'high',
+            'badge-light-warning': todo.priority == 'medium',
+            'badge-light-info': todo.priority == 'update'
           }"
         >
-          {{ tag }}
+          {{ todo.priority }}
         </div>
       </div>
-      <small class="text-nowrap text-muted mr-1">{{ todo.dueDate | date: ' MMM d' }}</small>
-      <div class="avatar" *ngIf="todo.assignee?.avatar.length > 0; else customAvatar">
-        <img src="{{ todo.assignee.avatar }}" alt="user-avatar" height="32" width="32" />
-      </div>
+      <small class="text-nowrap text-muted mr-1">{{ todo.due_date | date : " MMM d" }}</small>
       <ng-template #customAvatar>
         <div
           class="avatar"
@@ -52,7 +39,7 @@
             'bg-light-info': todo?.tags[0] == 'update'
           }"
         >
-          <div class="avatar-content">{{ todo.assignee?.fullName | initials }}</div>
+          <div class="avatar-content">{{ todo.assignee }}</div>
         </div>
         <ng-template #noAvatar>
           <div class="avatar bg-light-secondary">

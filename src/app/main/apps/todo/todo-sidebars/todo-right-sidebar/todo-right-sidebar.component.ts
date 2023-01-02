@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ElementRef, ViewChild } from "@angular/core";
 
-import { CoreSidebarService } from '@core/components/core-sidebar/core-sidebar.service';
+import { CoreSidebarService } from "@core/components/core-sidebar/core-sidebar.service";
 
-import { Todo } from 'app/main/apps/todo/todo.model';
-import { TodoService } from 'app/main/apps/todo/todo.service';
+import { Todo } from "app/main/apps/todo/todo.model";
+import { TodoService } from "app/main/apps/todo/todo.service";
 
 @Component({
-  selector: 'app-todo-right-sidebar',
-  templateUrl: './todo-right-sidebar.component.html',
-  encapsulation: ViewEncapsulation.None
+  selector: "app-todo-right-sidebar",
+  templateUrl: "./todo-right-sidebar.component.html",
+  encapsulation: ViewEncapsulation.None,
 })
 export class TodoRightSidebarComponent implements OnInit {
   // Public
@@ -18,14 +18,16 @@ export class TodoRightSidebarComponent implements OnInit {
   public selectTags;
   public selectAssignee;
 
-  @ViewChild('dueDateRef') private dueDateRef: any;
+  public tag;
+
+  @ViewChild("dueDateRef") private dueDateRef: any;
 
   public dueDateOptions = {
     altInput: true,
-    mode: 'single',
-    altInputClass: 'form-control flat-picker flatpickr-input invoice-edit-input',
-    altFormat: 'F j, Y',
-    dateFormat: 'Y-m-d'
+    mode: "single",
+    altInputClass: "form-control flat-picker flatpickr-input invoice-edit-input",
+    altFormat: "F j, Y",
+    dateFormat: "Y-m-d",
   };
 
   /**
@@ -43,16 +45,16 @@ export class TodoRightSidebarComponent implements OnInit {
    * Close Sidebar
    */
   closeSidebar() {
-    this._coreSidebarService.getSidebarRegistry('todo-sidebar-right').toggleOpen();
+    this._coreSidebarService.getSidebarRegistry("todo-sidebar-right").toggleOpen();
   }
 
   /**
    * Update Todo
    */
-  updateTodo() {
+  updateTodo(todoForm) {
     //! Fix: Temp fix till ng2-flatpicker support ng-modal (Getting NG0100: Expression has changed after it was checked error if we use ng-model with ng2-flatpicker)
-    this.todo.dueDate = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
-
+    this.todo.due_date = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
+    this.todo.priority = todoForm.value.addTag[0];
     this._todoService.updateCurrentTodo(this.todo);
     this.closeSidebar();
   }
@@ -63,7 +65,8 @@ export class TodoRightSidebarComponent implements OnInit {
   addTodo(todoForm) {
     if (todoForm.valid) {
       //! Fix: Temp fix till ng2-flatpicker support ng-modal
-      this.todo.dueDate = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
+      this.todo.priority = todoForm.priority;
+      this.todo.due_date = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
       this._todoService.updateCurrentTodo(this.todo);
       this.closeSidebar();
     }
@@ -103,9 +106,11 @@ export class TodoRightSidebarComponent implements OnInit {
    * On init
    */
   ngOnInit(): void {
-    this._todoService.onCurrentTodoChange.subscribe(response => {
+    this._todoService.onCurrentTodoChange.subscribe((response) => {
       if (Object.keys(response).length > 0) {
         this.todo = response;
+
+        this.tag = [this.todo.priority];
         this.isDataEmpty = false;
       } else {
         this.todo = new Todo();
@@ -113,13 +118,13 @@ export class TodoRightSidebarComponent implements OnInit {
         this.isDataEmpty = true;
       }
     });
-    this._todoService.onTagsChange.subscribe(response => {
-      this.selectTags = response.map(tagRef => {
+    this._todoService.onTagsChange.subscribe((response) => {
+      this.selectTags = response.map((tagRef) => {
         return tagRef.handle;
       });
     });
 
-    this._todoService.onAssigneeChange.subscribe(assigneeRef => {
+    this._todoService.onAssigneeChange.subscribe((assigneeRef) => {
       this.selectAssignee = assigneeRef;
     });
   }
