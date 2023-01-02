@@ -35,4 +35,12 @@ export class TodoManagementService {
   createNewTodo(todo: Todo) {
     return this.supabase.from("todo").insert(todo).single();
   }
+
+  updateTodo(todo: Todo) {
+    return this.supabase.from("todo").update(todo).eq("id", todo.id);
+  }
+
+  updateTodoStatus(name: string, value: boolean, id: number) {
+    return this.supabase.from("todo").update({ name: value }).eq("id", id);
+  }
 }

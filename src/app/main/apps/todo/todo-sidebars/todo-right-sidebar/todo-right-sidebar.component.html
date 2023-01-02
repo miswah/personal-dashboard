@@ -58,7 +58,7 @@
         </div>
         <div class="form-group my-1">
           <button type="submit" class="btn btn-primary add-todo-item mr-1" *ngIf="isDataEmpty === true" (click)="addTodo(todoForm)" rippleEffect>Add</button>
-          <button type="button" class="btn btn-primary update-btn update-todo-item mr-1" *ngIf="isDataEmpty === false" (click)="updateTodo()" rippleEffect>Update</button>
+          <button type="button" class="btn btn-primary update-btn update-todo-item mr-1" *ngIf="isDataEmpty === false" (click)="updateTodo(todoForm)" rippleEffect>Update</button>
           <button class="btn btn-outline-secondary add-todo-item" type="button" (click)="closeSidebar()" data-dismiss="modal" rippleEffect>Close</button>
         </div>
       </div>

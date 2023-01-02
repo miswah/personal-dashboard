@@ -51,10 +51,10 @@ export class TodoRightSidebarComponent implements OnInit {
   /**
    * Update Todo
    */
-  updateTodo() {
+  updateTodo(todoForm) {
     //! Fix: Temp fix till ng2-flatpicker support ng-modal (Getting NG0100: Expression has changed after it was checked error if we use ng-model with ng2-flatpicker)
     this.todo.due_date = this.dueDateRef.flatpickrElement.nativeElement.children[0].value;
-
+    this.todo.priority = todoForm.value.addTag[0];
     this._todoService.updateCurrentTodo(this.todo);
     this.closeSidebar();
   }

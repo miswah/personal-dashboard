@@ -288,14 +288,23 @@ export class TodoService implements Resolve<any> {
   /**
    * Post Todo (Update Todo to fake-db)
    */
-  postTodo() {
-    return new Promise((resolve, reject) => {
-      this._httpClient.post("api/todos-data/" + this.currentTodo.id, { ...this.currentTodo }).subscribe((response) => {
-        this.getTodosList().then((todos) => {
-          resolve(todos);
-        }, reject);
+  async postTodo() {
+    // return new Promise((resolve, reject) => {
+    //   this._httpClient.post("api/todos-data/" + this.currentTodo.id, { ...this.currentTodo }).subscribe((response) => {
+    //     this.getTodosList().then((todos) => {
+    //       resolve(todos);
+    //     }, reject);
+    //   });
+    // });
+
+    let { data: todo, error } = await this.todoService.updateTodo(this.currentTodo);
+
+    if (!error) {
+      this.getTodosList().then((todos) => {
+        this.sortTodos(this.sortParamRef);
+        return new Promise((resolve, reject) => resolve(todos));
       });
-    });
+    }
   }
 
   /**
