@@ -192,15 +192,30 @@ export class TodoService implements Resolve<any> {
    *
    * @param tagHandel
    */
-  getTodosByTag(tagHandel): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      this._httpClient.get("api/todos-data?tags=" + tagHandel).subscribe((todos: any) => {
-        this.todos = todos;
-        this.tempTodos = todos;
-        this.onTodoDataChange.next(this.todos);
+  async getTodosByTag(tagHandel): Promise<any[]> {
+    // return new Promise((resolve, reject) => {
+    //   this._httpClient.get("api/todos-data?tags=" + tagHandel).subscribe((todos: any) => {
+    //     this.todos = todos;
+    //     this.tempTodos = todos;
+    //     this.onTodoDataChange.next(this.todos);
+    //     this.sortTodos(this.sortParamRef);
+    //     resolve(this.todos);
+    //   }, reject);
+    // });
+
+    let { data: todos, error } = await this.todoService.getTodoViaPriority(tagHandel.toLowerCase());
+
+    if (!error) {
+      this.todos = todos;
+      this.tempTodos = todos;
+      this.onTodoDataChange.next(this.todos);
+      if (this.todos) {
         this.sortTodos(this.sortParamRef);
-        resolve(this.todos);
-      }, reject);
+      }
+    }
+
+    return new Promise((res, rej) => {
+      res(this.todos);
     });
   }
 

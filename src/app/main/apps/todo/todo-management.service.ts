@@ -26,4 +26,8 @@ export class TodoManagementService {
   getCompletedTodo() {
     return this.supabase.from("todo").select("*").eq("completed", true).order("id", { ascending: true });
   }
+
+  getTodoViaPriority(priority) {
+    return this.supabase.from("todo").select("*").eq("completed", false).eq("priority", priority).order("id", { ascending: true });
+  }
 }
