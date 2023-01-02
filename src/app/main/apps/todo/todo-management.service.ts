@@ -12,7 +12,7 @@ export class TodoManagementService {
   }
 
   getTodo() {
-    return this.supabase.from("todo").select("*").eq("completed", false).eq("deleted", false).order("id", { ascending: true });
+    return this.supabase.from("todo").select("*").eq("deleted", false).order("id", { ascending: true });
   }
 
   getImportantTodo() {

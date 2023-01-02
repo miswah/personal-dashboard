@@ -1,7 +1,7 @@
 export class Todo {
   id? = undefined;
   title = "";
-  dueDate = "";
+  due_date = "";
   description = "";
   assignee = "";
   tags = "";
