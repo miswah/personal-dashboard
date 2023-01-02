@@ -144,16 +144,25 @@ export class TodoService implements Resolve<any> {
    * @param filterHandel
    */
   async getTodosByFilter(filterHandel): Promise<any[]> {
-    let param;
+    let param, errors, todos;
     // Setup param for filter
     if (filterHandel === "all") {
-      param = "deleted=false";
+      let { data: todo, error } = await this.todoService.getTodo();
+      errors = error;
+      todos = todo;
     } else if (filterHandel === "deleted") {
-      param = filterHandel + "=true";
-    } else {
-      param = filterHandel + "=true" + "&&deleted=false";
+      let { data: todo, error } = await this.todoService.getDeletedTodo();
+      errors = error;
+      todos = todo;
+    } else if (filterHandel === "important") {
+      let { data: todo, error } = await this.todoService.getImportantTodo();
+      errors = error;
+      todos = todo;
+    } else if (filterHandel === "completed") {
+      let { data: todo, error } = await this.todoService.getCompletedTodo();
+      errors = error;
+      todos = todo;
     }
-
     // return new Promise((resolve, reject) => {
     //   this._httpClient.get('api/todos-data?' + param).subscribe((todos: any) => {
     //     this.todos = todos;
@@ -164,13 +173,13 @@ export class TodoService implements Resolve<any> {
     //   }, reject);
     // });
 
-    let { data: todos, error } = await this.todoService.getTodo();
-
-    if (!error) {
+    if (!errors) {
       this.todos = todos;
       this.tempTodos = todos;
       this.onTodoDataChange.next(this.todos);
-      this.sortTodos(this.sortParamRef);
+      if (this.todos) {
+        this.sortTodos(this.sortParamRef);
+      }
     }
 
     return new Promise((res, rej) => {

@@ -12,6 +12,18 @@ export class TodoManagementService {
   }
 
   getTodo() {
-    return this.supabase.from("todo").select("*").order("id", { ascending: true });
+    return this.supabase.from("todo").select("*").eq("completed", false).eq("deleted", false).order("id", { ascending: true });
+  }
+
+  getImportantTodo() {
+    return this.supabase.from("todo").select("*").eq("completed", false).eq("important", true).order("id", { ascending: true });
+  }
+
+  getDeletedTodo() {
+    return this.supabase.from("todo").select("*").eq("deleted", true).order("id", { ascending: true });
+  }
+
+  getCompletedTodo() {
+    return this.supabase.from("todo").select("*").eq("completed", true).order("id", { ascending: true });
   }
 }
