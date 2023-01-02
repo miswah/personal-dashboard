@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from "rxjs";
 
 import { Todo } from "./todo.model";
 import { TodoManagementService } from "./todo-management.service";
+import { rejects } from "assert";
 
 @Injectable()
 export class TodoService implements Resolve<any> {
@@ -303,15 +304,24 @@ export class TodoService implements Resolve<any> {
    * NOTE: In this POST request fakeDB will automatically assign a ID to new Object
    * Refer : https://stackoverflow.com/questions/50861850/id-should-be-optional-in-angular-in-memory-web-api
    */
-  postNewTodo() {
-    return new Promise((resolve, reject) => {
-      this._httpClient.post("api/todos-data/", this.currentTodo).subscribe((response) => {
-        this.getTodosList().then((todos) => {
-          this.sortTodos(this.sortParamRef);
-          resolve(todos);
-        }, reject);
+  async postNewTodo() {
+    // return new Promise((resolve, reject) => {
+    //   this._httpClient.post("api/todos-data/", this.currentTodo).subscribe((response) => {
+    //     this.getTodosList().then((todos) => {
+    //       this.sortTodos(this.sortParamRef);
+    //       resolve(todos);
+    //     }, reject);
+    //   });
+    // });
+
+    let { data: todo, error } = await this.todoService.createNewTodo(this.currentTodo);
+
+    if (!error) {
+      this.getTodosList().then((todos) => {
+        this.sortTodos(this.sortParamRef);
+        return new Promise((resolve, reject) => resolve(todos));
       });
-    });
+    }
   }
 
   /**

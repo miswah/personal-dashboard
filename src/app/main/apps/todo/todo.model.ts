@@ -3,8 +3,7 @@ export class Todo {
   title = "";
   due_date = "";
   description = "";
-  assignee = "";
-  tags = "";
+  tag = undefined;
   completed = false;
   deleted = false;
   important = false;

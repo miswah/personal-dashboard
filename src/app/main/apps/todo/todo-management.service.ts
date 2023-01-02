@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { SupabaseClient, createClient } from "@supabase/supabase-js";
+import { Session, SupabaseClient, createClient } from "@supabase/supabase-js";
 import { environment } from "environments/environment";
+import { Todo } from "./todo.model";
 
 @Injectable({
   providedIn: "root",
@@ -29,5 +30,9 @@ export class TodoManagementService {
 
   getTodoViaPriority(priority) {
     return this.supabase.from("todo").select("*").eq("completed", false).eq("priority", priority).order("id", { ascending: true });
+  }
+
+  createNewTodo(todo: Todo) {
+    return this.supabase.from("todo").insert(todo).single();
   }
 }
