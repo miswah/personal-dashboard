@@ -39,8 +39,4 @@ export class TodoManagementService {
   updateTodo(todo: Todo) {
     return this.supabase.from("todo").update(todo).eq("id", todo.id);
   }
-
-  updateTodoStatus(name: string, value: boolean, id: number) {
-    return this.supabase.from("todo").update({ name: value }).eq("id", id);
-  }
 }
