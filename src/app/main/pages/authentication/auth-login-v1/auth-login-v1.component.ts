@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from "@angular/forms";
 
-import { takeUntil } from "rxjs/operators";
+import { first, takeUntil } from "rxjs/operators";
 import { Subject } from "rxjs";
 
 import { CoreConfigService } from "@core/services/config.service";
 import { SupabaseService } from "@core/services/supabase.service";
 import { Router } from "@angular/router";
+import { AuthenticationService } from "app/auth/service";
 
 @Component({
   selector: "app-auth-login-v1",
@@ -30,7 +31,7 @@ export class AuthLoginV1Component implements OnInit {
    * @param {CoreConfigService} _coreConfigService
    * @param {FormBuilder} _formBuilder
    */
-  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder, private supabase: SupabaseService, private router: Router) {
+  constructor(private _coreConfigService: CoreConfigService, private _formBuilder: UntypedFormBuilder, private supabase: SupabaseService, private router: Router, private _authenticationService: AuthenticationService) {
     this._unsubscribeAll = new Subject();
 
     // Configure the layout
@@ -74,6 +75,11 @@ export class AuthLoginV1Component implements OnInit {
       return;
     }
 
+    this._authenticationService
+      .login("admin@demo.com", "admin")
+      .pipe(first())
+      .subscribe((data) => {});
+
     this.getToken();
   }
 
@@ -86,7 +92,7 @@ export class AuthLoginV1Component implements OnInit {
 
     if (data) {
       localStorage.setItem("userJWT", data.session.access_token);
-      this.router.navigate(["/dashboard"]);
+      this.router.navigate(["/dashboard/ecommerce"]);
     }
   }
 
