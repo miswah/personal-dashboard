@@ -94,7 +94,7 @@ const appRoutes: Routes = [
   { path: "board", loadChildren: () => import("./main/view/dashboard/dashboard.module").then((m) => m.DashboardModule) },
   {
     path: "",
-    redirectTo: "/dashboard/ecommerce",
+    redirectTo: "/board",
     pathMatch: "full",
   },
   {
