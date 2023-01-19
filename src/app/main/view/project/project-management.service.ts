@@ -22,6 +22,6 @@ export class ProjectManagementService {
   }
 
   getProjects() {
-    return (this.listOfProjects = this.supabase.from("project").select("*"));
+    return (this.listOfProjects = this.supabase.from("projects").select("*").order("id", { ascending: true }));
   }
 }

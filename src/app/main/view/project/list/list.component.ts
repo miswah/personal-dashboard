@@ -160,9 +160,7 @@ export class ListComponent implements OnInit {
 
   constructor(private router: Router, private projectService: ProjectManagementService) {}
 
-  ngOnInit(): void {
-    this.getProjects();
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.highchartclick();
@@ -170,22 +168,6 @@ export class ListComponent implements OnInit {
 
   redirectToView(id: number) {
     this.router.navigate(["../project/view", id]);
-  }
-
-  async getProjects(): Promise<void> {
-    //To avoid multiple api calls for same data check if data exists
-    if (this.projectService.listOfProjects) {
-      this.projects = this.projectService.listOfProjects;
-      return;
-    }
-
-    let { data: projects, error } = await this.projectService.getProjects();
-    if (error) {
-      console.error("error", error.message);
-    } else {
-      this.projectService.listOfProjects = projects;
-      this.projects = projects;
-    }
   }
 
   highchartclick() {
