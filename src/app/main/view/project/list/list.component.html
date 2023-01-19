@@ -2,7 +2,7 @@
   <div class="col-12">
     <swiper class="swiper-centered-slides swiper-container p-1" [config]="swiperswiperCenteredSlides" [(index)]="centeredSlideIndex">
       <div *ngFor="let project of projects">
-        <app-project-card [project]="project" (click)="redirectToView(project.id)"></app-project-card>
+        <!-- <app-project-card [project]="project" (click)="redirectToView(project.id)"></app-project-card> -->
       </div>
     </swiper>
   </div>

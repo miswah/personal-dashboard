@@ -11,6 +11,7 @@ import { TimelineComponent } from "./timeline/timeline.component";
 import { jqxKanbanModule } from "jqwidgets-ng/jqxkanban";
 import { ProjectCardComponent } from "./project-card/project-card.component";
 import { SwiperModule } from "ngx-swiper-wrapper";
+import { ProjectDashboardComponent } from './project-dashboard/project-dashboard.component';
 
 // Routes
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent, ProjectCardComponent],
+  declarations: [ProjectComponent, ListComponent, CardComponent, ViewComponent, TimelineComponent, ProjectCardComponent, ProjectDashboardComponent],
   imports: [CommonModule, RouterModule.forChild(routes), NgbModule, jqxKanbanModule, SwiperModule],
   exports: [CardComponent],
 })
