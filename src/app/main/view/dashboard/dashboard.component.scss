@@ -1,0 +1,23 @@
+.course__tags {
+  border: 1px solid #fff;
+  padding: 5px;
+  color: #000;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+
+.project__card {
+  box-shadow: 0 12px 13px #00000014;
+}
+
+.course__card {
+  &-title {
+    font-size: 25px;
+    margin-left: 5px;
+  }
+
+  &-subtitle {
+    font-weight: 900;
+  }
+}

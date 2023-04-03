@@ -1,0 +1,76 @@
+<div class="card bg-danger text-white">
+  <div class="card-body">
+    <h4 class="card-title text-white">
+      Expense
+      <button type="button" class="btn btn-dark pull-right" rippleEffect (click)="modalOpenVC(modalVC)">Add New</button>
+    </h4>
+
+    <div *ngFor="let expense of expenses">
+      <app-card [data]="expense" [isExpense]="true"></app-card>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #modalVC let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalCenterTitle">Add a new Expense</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <form [formGroup]="expenseForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xl-6 col-md-6 col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Title</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Title" formControlName="title" />
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Details</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Details" formControlName="details" />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-6 col-md-6 col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Tag</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Tag" formControlName="tag" />
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 col-12 mb-1 mt-2">
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" name="Basic Date Picker" formControlName="date" ngbDatepicker #basicDP="ngbDatepicker" />
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary feather icon-calendar" (click)="basicDP.toggle()" type="button" rippleEffect></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12 mb-1">
+          <div class="form-group">
+            <label for="basicInput">Price</label>
+            <input type="text" class="form-control" id="basicInput" placeholder="Enter Price" formControlName="amount" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click'); onSubmit()" rippleEffect>Accept</button>
+  </div>
+
+  {{ expenseForm.value | json }}
+</ng-template>
+<!-- / Modal -->

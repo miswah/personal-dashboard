@@ -1,0 +1,18 @@
+<div class="card chapter-list">
+  <div class="card-body">
+    <p class="card-tite lead">{{ data.date | date }}</p>
+    <ul class="list-group">
+      <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let d of data.data">
+        <span
+          >{{ d.title }}
+          <p class="text-muted no-p">
+            {{ d.tag }}
+          </p></span
+        >
+
+        <span *ngIf="isExpense" style="color: red">{{ d.amount | currency : "INR" }}</span>
+        <span *ngIf="!isExpense" style="color: green">{{ d.amount | currency : "INR" }}</span>
+      </li>
+    </ul>
+  </div>
+</div>

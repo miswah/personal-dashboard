@@ -1,0 +1,43 @@
+<div class="row" id="table-hover-row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header"><h4 class="card-title">Course List</h4></div>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr class="text-center">
+              <th>Title</th>
+              <th>Total Tasks</th>
+              <th>Completed Tasks</th>
+              <th>Projects</th>
+              <th>Last Visted</th>
+              <th>Due Date</th>
+              <th>Total Modules</th>
+              <th>Completed Modules</th>
+              <th>Last Visited Module</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of courses; let i = index" class="text-center" (click)="redirectToView(course.id, i)">
+              <ng-container>
+                <td>{{ course.title }}</td>
+                <td>{{ course.total_tasks }}</td>
+                <td>{{ course.completed_tasks }}</td>
+                <td>{{ course.project }}</td>
+                <td>{{ course.last_visited | date : "shortDate" }}</td>
+                <td>{{ course.due_date | date : "shortDate" }}</td>
+                <td>{{ course.total_modules }}</td>
+                <td>{{ course.completed_modules }}</td>
+                <td>{{ course.last_visited_module }}</td>
+              </ng-container>
+              <td>
+                <a href="{{ course.link }}"> <button class="btn">Open</button></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="col-md-6 col-lg-4">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">{{ project.title }}</h4>
+      <p>
+        <span class="card-subtitle text-muted pull-left">{{ total_tasks }}</span>
+        <span class="pull-right">{{ project.type }}</span>
+      </p>
+    </div>
+    <div class="card-body">
+      <p class="card-text">{{ project.description }}</p>
+      <div class="row mt-1">
+        <div class="col-6">Created At</div>
+        <div class="col-6">{{ project.created_at | date : "medium" }}</div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-6">Priority</div>
+        <div class="col-6">{{ project.priority }}</div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-6">Deadline</div>
+        <div class="col-6">{{ project.deadline }}</div>
+      </div>
+
+      <div class="row mt-1">
+        <div class="col-6">Comments</div>
+        <div class="col-6">{{ project.comments }}</div>
+      </div>
+
+      <div class="progress-wrapper mt-2">
+        <div class="mb-25">
+          <span> Progress </span>
+          <span style="margin-left: 90%">{{ total_tasks / completed_tasks }}%</span>
+        </div>
+        <ngb-progressbar type="primary" [value]="total_tasks / completed_tasks"></ngb-progressbar>
+      </div>
+    </div>
+  </div>
+</div>

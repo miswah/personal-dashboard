@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-12">
+    <swiper class="swiper-centered-slides swiper-container p-1" [config]="swiperswiperCenteredSlides" [(index)]="centeredSlideIndex">
+      <div *ngFor="let project of projects">
+        <!-- <app-project-card [project]="project" (click)="redirectToView(project.id)"></app-project-card> -->
+      </div>
+    </swiper>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div id="container" #divRef></div>
+</div>
+
+<jqxKanban #myKanban (onItemAttrClicked)="myKanbanOnItemAttrClicked($event)" (onColumnAttrClicked)="myKanbanonColumnAttrClicked($event)" [height]="600" [template]="template" [source]="dataAdapter" [columns]="columns" [width]="getWidth()" [resources]="resourcesAdapterFunc()" [itemRenderer]="itemRenderer"> </jqxKanban>

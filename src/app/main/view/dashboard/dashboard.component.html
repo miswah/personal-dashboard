@@ -1,0 +1,117 @@
+<div>
+  <div class="row">
+    <div class="col-md-12 col-xl-6">
+      <div class="card">
+        <!-- Search box -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <div class="form-group">
+                <label for="basicInput">Search Projects</label>
+                <input type="text" class="form-control" id="basicInput" placeholder="Enter Project name " />
+              </div>
+            </div>
+          </div>
+          <hr />
+          <!-- Project List -->
+          <div *ngFor="let project of projects">
+            <app-card-full [project]="project" (click)="redirectToView(project.id)"></app-card-full>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 col-xl-6">
+      <div class="card">
+        <div class="card-body">todo</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="basicInput">Search Projects</label>
+                <input type="text" class="form-control" id="basicInput" placeholder="Enter Project name " />
+              </div>
+            </div>
+            <div class="col-6">
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+              <span class="course__tags">CSS</span>
+            </div>
+          </div>
+          <hr />
+
+          <!-- Project cards -->
+          <div *ngFor="let course of courses">
+            <div class="course__card">
+              <div class="row">
+                <div class="col-5">
+                  <p class="course__card-title">{{ course.title }}</p>
+                </div>
+
+                <div class="col-7">
+                  <div class="progress-wrapper">
+                    <ngb-progressbar type="primary" showValue="true" [height]="progressbarHeight" [value]="25"></ngb-progressbar>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row text-center">
+                <div class="col-lg-3">
+                  {{ course.modules }}
+                  <p class="course__card-subtitle">Modules</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.completed_modules }}
+                  <p class="course__card-subtitle">Completed Modules</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.next_task }}
+                  <p class="course__card-subtitle">Next Task</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.project }}
+                  <p class="course__card-subtitle">Project</p>
+                </div>
+              </div>
+              <div class="row text-center mt-2">
+                <div class="col-lg-3">
+                  {{ course.last_visited | date : "short" }}
+                  <p class="course__card-subtitle">Last Visited</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.modules }}
+                  <p class="course__card-subtitle">Total Modules</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.completed_modules }}
+                  <p class="course__card-subtitle">Completed Modules</p>
+                </div>
+                <div class="col-lg-3">
+                  {{ course.last_visited_module }}
+                  <p class="course__card-subtitle">Last Modules</p>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
