@@ -2,10 +2,81 @@
     <div class="row">
         <div class="col-md-6 col-sm-12">
             <div class="card">
-                <div class="card-title"><h3>{{course.title}}</h3></div>
-                <div class="card-body"></div>
+                <div class="card-body">
+                    <div class="card-title"><h3 class="text-center">{{course.title}}</h3></div>
+                    <div>
+
+                        <cdk-virtual-scroll-viewport  style="height: 500px" itemSize="5" >
+                            <ng-container *cdkVirtualFor="let module of modules; let i = index">
+                                <p class="lead"> <b>({{i+1}}) {{module.name}}</b></p>
+                            <ng-container *ngFor="let chapter of filterChapters(module.id)">
+                                <div class="custom-control custom-control-success custom-checkbox mb-1">
+                                    <input type="checkbox" class="custom-control-input" [id]="chapter.id" [checked]="chapter.status" (click)="changeStatusOfChapter(chapter.id, !chapter.status)" />
+                                    <label class="custom-control-label" [for]="chapter.id">{{chapter.title}}</label>
+                                  </div> 
+                            </ng-container> 
+                            </ng-container>
+                          </cdk-virtual-scroll-viewport>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-6 col-sm-12"></div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-">
+                        <div class="card-body">
+                            <strong>External Resources</strong>
+
+                            <ol class="alternating-colors">
+                            <ng-container *ngFor="let resource of externalResources">
+                                <li>
+                                <strong>{{resource.label}}</strong>
+                               <p>
+                                <a href="{{ resource.url }}" target="_blank"> <button class="btn">Open</button></a>  
+                            </p> 
+                            </li>
+                            </ng-container>
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header"><h4 class="card-title">Related Projects</h4></div>
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr class="text-center">
+                                <th>Title</th>
+                                <th>Tags</th>
+                                <th>Link</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let project of projects; let i = index" class="text-center" >
+                            
+                                    <td (click)="redirectToView(project.id)">{{ project.title }}</td>
+                                    <td (click)="redirectToView(project.id)">{{project.tags | json}}</td>
+                               
+                                <td><a href="{{ project.url }}" target="_blank"> <button class="btn">Open</button></a></td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <app-comments [comments]="comments" (saveNewComment)="saveNewComment($event)"> </app-comments>
+        </div>
     </div>
 </div>

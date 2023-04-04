@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-body">
+        <ng-container *ngFor="let comment of comments">
+            <div class="card-title"> Commented on {{comment.created_at | date :'medium'}}</div>
+                <div class="box sb3 mb-2">
+                       <p class="lead">{{comment.comment}}</p>
+                    </div>
+        </ng-container>
+
+
+        <div class="mt-5">
+            <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Button on right"
+                  aria-describedby="button-addon2"
+                  #input
+                />
+                <div class="input-group-append" id="button-addon2">
+                  <button class="btn btn-outline-primary" type="button" rippleEffect (click)="saveComment(input.value)">Send</button>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>

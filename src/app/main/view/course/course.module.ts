@@ -14,6 +14,8 @@ import { CourseActivityComponent } from "./course-activity/course-activity.compo
 import { CourseDashboardComponent } from "./course-dashboard/course-dashboard.component";
 import { NgApexchartsModule } from "ng-apexcharts";
 import { CourseTableComponent } from "./course-table/course-table.component";
+import { CommentsComponent } from "../shared/components/comments/comments.component";
+import { ScrollingModule } from "@angular/cdk/scrolling";
 
 // Routes
 const routes: Routes = [
@@ -22,6 +24,6 @@ const routes: Routes = [
 ];
 @NgModule({
   declarations: [CourseComponent, ListComponent, TimelineComponent, ViewComponent, CourseCardComponent, LastCoursesComponent, CourseActivityComponent, CourseDashboardComponent, CourseTableComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, SwiperModule, NgApexchartsModule],
+  imports: [CommonModule, RouterModule.forChild(routes), NgbModule, SwiperModule, NgApexchartsModule, CommentsComponent, ScrollingModule],
 })
 export class CourseModule {}

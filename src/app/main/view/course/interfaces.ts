@@ -19,8 +19,40 @@ export interface Course {
 export interface Module {
   id: number;
   name: string;
-  chapter_name: string[];
   status: boolean;
   course_id: number;
   number: number;
+}
+
+
+export interface Chapter {
+  id:number;
+  title: string;
+  status: boolean;
+  created_at: string;
+  module_id: number;
+  course_id: number;
+}
+
+export interface ExternalResource {
+  id: number;
+  label: string;
+  url: string;
+  course_id: number;
+}
+
+
+export interface CourseComment {
+  id?:number;
+  created_at?: string;
+  comment:string;
+  course_id: number
+}
+
+export interface CourseProject {
+  id:number;
+  url: string;
+  tags: string[];
+  title:string;
+  course_id:number;
 }
