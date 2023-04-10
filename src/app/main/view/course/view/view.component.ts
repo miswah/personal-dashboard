@@ -10,191 +10,27 @@ import { log } from "console";
   styleUrls: ["./view.component.scss"],
 })
 export class ViewComponent implements OnInit {
- public course:Course =
-  {
-    "id": 1,
-    "created_at": "2023-01-01T10:59:26.570977+00:00",
-    "title": "Microservices with springboot",
-    "status": "NEW",
-    "total_tasks": null,
-    "completed_tasks": null,
-    "total_modules": 12,
-    "completed_modules": 1,
-    "due_date": null,
-    "last_visited": null,
-    "started_at": "2023-01-01T10:59:09+00:00",
-    "last_visited_module": "Introduction to sprintboot",
-    "link": "https://www.dailycodebuffer.in/s/courses/62de4bf90cf2b7be754707d8/take",
-    "tags_id": 1
-  };
+ public course:Course;
  private courseId:number;
- public modules: Module[] = [
-  {
-    "id": 1,
-    "name": "Microservices with Springboot Introduction",
-    "status": false,
-    "course_id": 1,
-    "number": 1
-  },
-  {
-    "id": 2,
-    "name": "Introduction to sprintboot",
-    "status": false,
-    "course_id": 1,
-    "number": 2
-  }
-];
- public chapters: Chapter[] = [
-  {
-    "id": 1,
-    "created_at": "2023-04-03T17:39:22.81749+00:00",
-    "title": "Course Introduction",
-    "status": false,
-    "module_id": 1,
-    "course_id": 1
-  },
-  {
-    "id": 2,
-    "created_at": "2023-04-03T17:39:40.068016+00:00",
-    "title": "Course Repo Details",
-    "status": false,
-    "module_id": 1,
-    "course_id": 1
-  },
-  {
-    "id": 3,
-    "created_at": "2023-04-03T17:41:13.606249+00:00",
-    "title": "What is Sprintboot?",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 4,
-    "created_at": "2023-04-03T17:41:25.126259+00:00",
-    "title": "What is Dependecy Injection?",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 5,
-    "created_at": "2023-04-03T17:41:44.141527+00:00",
-    "title": "Spring Initializr",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 6,
-    "created_at": "2023-04-03T17:42:03.891449+00:00",
-    "title": "Setting up IDE",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 7,
-    "created_at": "2023-04-03T17:43:02.596991+00:00",
-    "title": "Springboot starters projects",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 8,
-    "created_at": "2023-04-03T17:43:34.165055+00:00",
-    "title": "Understanding Springboot Magic",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 9,
-    "created_at": "2023-04-03T17:43:45.594623+00:00",
-    "title": "Embedded Servers",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 10,
-    "created_at": "2023-04-03T17:44:02.486073+00:00",
-    "title": "Springboot Actuator",
-    "status": false,
-    "module_id": 2,
-    "course_id": 1
-  },
-  {
-    "id": 11,
-    "created_at": "2023-04-03T17:44:14.544462+00:00",
-    "title": "Devtools",
-    "status": true,
-    "module_id": 2,
-    "course_id": 1
-  }
-];
+ public modules: Module[] = [];
+ public chapters: Chapter[] = [];
 
-public externalResources:ExternalResource[] = [
-  {
-    "id": 1,
-    "label": "Notes",
-    "url": "https://www.notion.so/Java-Notes-92cf841d758a4e47819bba13e181155d",
-    "course_id": 1
-  }
-];
+public externalResources:ExternalResource[] = [];
 
-public comments : CourseComment[] = [
-  {
-    "id": 1,
-    "created_at": "2023-04-04T13:40:21.649701+00:00",
-    "comment": "test comment",
-    "course_id": 1
-  },
-  {
-    "id": 2,
-    "created_at": "2023-04-04T13:40:21.649701+00:00",
-    "comment": "asdqwe qwe qwe this was ta best dat?",
-    "course_id": 1
-  },
-  {
-    "id": 3,
-    "created_at": "2023-04-04T13:40:21.649701+00:00",
-    "comment": "please checkout the method for these ",
-    "course_id": 1
-  },
-  {
-    "id": 4,
-    "created_at": "2023-04-04T13:40:21.649701+00:00",
-    "comment": "pink purple and red",
-    "course_id": 1
-  }
-];
+public comments : CourseComment[] = [];
 
-public projects:CourseProject[] = [
-  {
-    "title": "Mission Logs",
-    "url": "https://www.notion.so/Java-Notes-92cf841d758a4e47819bba13e181155d",
-    "tags": [
-      "CSS",
-      "HTML",
-      "Angular"
-    ],
-    "course_id": 1,
-    "id": 1
-  }
-];
+public projects:CourseProject[] = [];
   
   constructor(private route: ActivatedRoute, private courseService: CourseManagementService, private router: Router) {}
 
   ngOnInit(): void {
     this.courseId = +this.route.snapshot.paramMap.get("id");
-      // this.getCourse();
-      // this.getModules();
-      // this.getChapters();
-      // this.getExternalResource();
-      // this.getComments();
-      // this.getProjects();
+      this.getCourse();
+      this.getModules();
+      this.getChapters();
+      this.getExternalResource();
+      this.getComments();
+      this.getProjects();
   }
 
 
