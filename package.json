@@ -8,7 +8,7 @@
     "start-hmr-sourcemaps": "ng serve --configuration hmr --source-map=true --hmr-warning=false",
     "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --output-path docs --base-href /personal-dashboard/",
     "build-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --stats-json",
-    "build:prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production",
+    "build:prod": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production  --output-path docs --base-href /personal-dashboard/",
     "build:prod-stats": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --configuration production --stats-json",
     "bundle-analyzer": "webpack-bundle-analyzer dist/vuexy/stats.json",
     "test": "ng test",
