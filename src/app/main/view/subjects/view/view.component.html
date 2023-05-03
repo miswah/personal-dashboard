@@ -56,8 +56,13 @@
           <p class="card-tite">Important Topic List</p>
           <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topic of topics">
-              <span>{{ topic.title }}</span>
-              <span>{{ topic.chapter }}</span>
+              <a href="{{topic.external_link}}" target="_blank" *ngIf="topic.external_link">
+                <span>{{ topic.title }}</span>
+                <span>{{ topic.chapter }}</span>
+              </a>
+
+              <span  *ngIf="!topic.external_link">{{ topic.title }}</span>
+              <span  *ngIf="!topic.external_link">{{ topic.chapter }}</span>
 
               <span class="pull-right">
                 <button type="button" class="btn btn-flat-success" rippleEffect *ngIf="topic.is_completed"><span [data-feather]="'check'" [class]="'mr-25'"></span>Completed</button>
