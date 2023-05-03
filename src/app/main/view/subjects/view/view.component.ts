@@ -79,15 +79,15 @@ export class ViewComponent implements OnInit {
   }
 
   async updateChapterStatus(chapterId: number): Promise<void> {
-    let { data: topics, error } = await this.subjectService.updateChapterStatus(chapterId, true);
+    let { data: chapter, error } = await this.subjectService.updateChapterStatus(chapterId, true);
 
     if (error) {
       console.error("update Error", error.message);
     } else {
-      console.log("success", topics);
-      let index = this.topics.findIndex((x) => x.id === chapterId);
+      console.log("success", chapter);
+      let index = this.chapters.findIndex((x) => x.id === chapterId);
       this.subjectService.listOfChapters[index].is_completed = true;
-      this.topics[index].is_completed = true;
+      this.chapters[index].is_completed = true;
     }
   }
 }
