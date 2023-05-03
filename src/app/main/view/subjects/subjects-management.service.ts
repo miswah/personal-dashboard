@@ -36,4 +36,8 @@ export class SubjectsManagementService {
   getTopics(subjectId: Number) {
     return this.supabase.from("subject_topics").select("*").eq("subject_id", subjectId).order("id", { ascending: true });
   }
+
+  updateTopicStatus(topicId: number, status: boolean){
+    return this.supabase.from("subject_topics").update({ is_completed: status }).eq("id", topicId);
+  }
 }

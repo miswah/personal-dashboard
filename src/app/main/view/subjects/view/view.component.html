@@ -58,6 +58,11 @@
             <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let topic of topics">
               <span>{{ topic.title }}</span>
               <span>{{ topic.chapter }}</span>
+
+              <span class="pull-right">
+                <button type="button" class="btn btn-flat-success" rippleEffect *ngIf="topic.is_completed"><span [data-feather]="'check'" [class]="'mr-25'"></span>Completed</button>
+              <button type="button" class="btn btn-outline-primary" rippleEffect *ngIf="!topic.is_completed" (click)="updateTopicStatus(topic.id)"><span [data-feather]="'check'" [class]="'mr-25'"></span>Done</button>
+              </span>
             </li>
           </ul>
         </div>

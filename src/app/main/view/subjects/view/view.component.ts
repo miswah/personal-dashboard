@@ -90,4 +90,18 @@ export class ViewComponent implements OnInit {
       this.chapters[index].is_completed = true;
     }
   }
+
+
+  async updateTopicStatus(topicId: number): Promise<void> {
+    let { data: topic, error } = await this.subjectService.updateTopicStatus(topicId, true);
+
+    if (error) {
+      console.error("update Error", error.message);
+    } else {
+      console.log("success", topic);
+      let index = this.topics.findIndex((x) => x.id === topicId);
+      this.subjectService.listOfTopics[index].is_completed = true;
+      this.topics[index].is_completed = true;
+    }
+  }
 }
